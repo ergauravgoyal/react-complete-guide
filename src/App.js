@@ -4,62 +4,62 @@ import Person from "./Person/Person";
 
 class App extends Component {
   state = {
-    persons: [
+    person: [
       { name: "Gaurav", age: 25 },
       { name: "Tejas", age: 6 },
-      { name: "Ishu", age: 1 }
+      { name: "Ikshit", age: 1 }
     ]
   };
   switchNameHandler = newName => {
-    console.log("Button Clicked");
+    //console.log("button clicked");
     this.setState({
-      persons: [
-        { name: newName, age: 25 },
+      person: [
+        { name: newName, age: 28 },
         { name: "Tejas", age: 6 },
-        { name: "Ikshit", age: 1 }
+        { name: "Prashant", age: 1 }
       ]
     });
   };
-  nameChangedHandler = event => {
+  nameChangedhandler = event => {
     this.setState({
-      persons: [
-        { name: "Gaurav Goyal", age: 25 },
-        { name: "Tejas", age: 6 },
-        { name: event.target.value, age: 1 }
+      person: [
+        { name: "Gaurav", age: 28 },
+        { name: event.target.value, age: 6 },
+        { name: "Prashant", age: 1 }
       ]
     });
   };
   render() {
     const style = {
-      backgroundColor: "#eee",
-      fontSize: "inherit",
+      backgroundColor: "white",
+      font: "inherit",
       border: "1px solid blue",
       padding: "8px",
-      cursor: "pointer"
+      borderRadius: "10px 10px",
+      cursor: "pointers"
     };
     return (
       <div className="App">
-        <h1>Hi ! I am a React App</h1>
+        <h1>Hi, I'm a React App</h1>
         <p>This is really working</p>
         <button
           style={style}
-          onClick={this.switchNameHandler.bind(this, "Gaurav Goyal")}
+          onClick={() => this.switchNameHandler("Gaurav Goyal")}
         >
           Switch Name
         </button>
+        <Person name={this.state.person[0].name} age={this.state.person[0].age}>
+          My Hobbies:Finance
+        </Person>
         <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
+          name={this.state.person[1].name}
+          age={this.state.person[1].age}
+          click={this.switchNameHandler.bind(this, "Gaurav Goyal !!")}
+          changed={this.nameChangedhandler}
         />
         <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, "Gaurav G")}
-        />
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-          changed={this.nameChangedHandler}
+          name={this.state.person[2].name}
+          age={this.state.person[2].age}
         />
       </div>
     );
@@ -67,3 +67,5 @@ class App extends Component {
 }
 
 export default App;
+
+// We can also use    <button onClick={this.switchNameHandler.bind(this,"Gaurav Goyal")}>
