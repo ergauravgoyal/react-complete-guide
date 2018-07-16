@@ -13,7 +13,7 @@ class App extends Component {
     showPersons: false
   };
   nameChangedhandler = (event, id) => {
-    debugger;
+    //debugger;
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     });
