@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Radium, { StyleRoot } from "radium";
-import "./App.css";
+import myClasses from "./App.css";
 import Person from "./Person/Person";
 
 class App extends Component {
@@ -60,7 +60,7 @@ class App extends Component {
     };
 
     let persons = null;
-
+    //let btnClass = "";
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -77,22 +77,24 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor = "red";
-      style[":hover"] = {
-        backgroundColor: "salmon",
-        color: "black"
-      };
+      // btnClass = myClasses.red;
+      // style.backgroundColor = "red";
+      // style[":hover"] = {
+      //   backgroundColor: "salmon",
+      //   color: "black"
+      // };
     }
     let classes = [];
     if (this.state.persons.length <= 2) {
-      classes.push("red");
+      classes.push(myClasses.red);
     }
+    //debugger;
     if (this.state.persons.length <= 1) {
-      classes.push("bold");
+      classes.push(myClasses.bold);
     }
     return (
       <StyleRoot>
-        <div className="App">
+        <div className={myClasses.App}>
           <h1>Hi, I'm a React App</h1>
           <p className={classes}>This is really working</p>
           <button style={style} onClick={this.togglePersonHandler}>
