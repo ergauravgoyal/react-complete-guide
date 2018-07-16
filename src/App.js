@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Radium, { StyleRoot } from "radium";
 import "./App.css";
 import Person from "./Person/Person";
 
@@ -45,12 +46,17 @@ class App extends Component {
   };
   render() {
     const style = {
-      backgroundColor: "white",
+      backgroundColor: "green",
       font: "inherit",
+      color: "white",
       border: "1px solid blue",
       padding: "8px",
       borderRadius: "10px 10px",
-      cursor: "pointers"
+      cursor: "pointers",
+      ":hover": {
+        backgroundColor: "lightgreen",
+        color: "black"
+      }
     };
 
     let persons = null;
@@ -71,20 +77,34 @@ class App extends Component {
           })}
         </div>
       );
+      style.backgroundColor = "red";
+      style[":hover"] = {
+        backgroundColor: "salmon",
+        color: "black"
+      };
+    }
+    let classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push("red");
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push("bold");
     }
     return (
-      <div className="App">
-        <h1>Hi, I'm a React App</h1>
-        <p>This is really working</p>
-        <button style={style} onClick={this.togglePersonHandler}>
-          Switch Name
-        </button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, I'm a React App</h1>
+          <p className={classes}>This is really working</p>
+          <button style={style} onClick={this.togglePersonHandler}>
+            Switch Name
+          </button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
   }
 }
 
-export default App;
+export default Radium(App);
 
 // We can also use    <button onClick={this.switchNameHandler.bind(this,"Gaurav Goyal")}>
