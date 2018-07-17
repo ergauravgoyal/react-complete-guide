@@ -7,6 +7,10 @@ const person = props => {
   //     width: "450px"
   //   }
   // };
+  // const rnd = Math.random();
+  // if (rnd > 0.9) {
+  //   throw new Error("Something went wrong");
+  // }
   return (
     <div className={myPersonClass.Person}>
       <p onClick={props.click}>
