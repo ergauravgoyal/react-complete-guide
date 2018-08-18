@@ -3,24 +3,31 @@ import Radium, { StyleRoot } from "radium";
 import myClasses from "./App.css";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
+
 class App extends Component {
-  constructor(props) {
-    super(props);
-    console.log("[App.js] Inside Constructor", props);
-    this.state = {
-      persons: [
-        { id: "rtwetw", name: "Gaurav", age: 25 },
-        { id: "reyewrq", name: "Tejas", age: 6 },
-        { id: "qrwqqwr", name: "Ikshit", age: 1 }
-      ],
-      showPersons: false
-    };
-  }
+  state = {
+    persons: [
+      { id: "rtwetw", name: "Gaurav", age: 25 },
+      { id: "reyewrq", name: "Tejas", age: 6 },
+      { id: "qrwqqwr", name: "Ikshit", age: 1 }
+    ],
+    showPersons: false
+  };
   componentWillMount() {
     console.log("[App.js] inside componentWillMount()");
   }
   componentDidMount() {
     console.log("[App.js] Inside componentDidMount()");
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[Update App.js] Inside shouldComponentUpdate", nextProps);
+    return true;
+  }
+  componentWillUpdate(nextProps, nextState) {
+    console.log("[Update App.js] Inside componentWillUpdate", nextProps);
+  }
+  componentDidUpdate() {
+    console.log("[Update App.js] Inside componentDidUpdate");
   }
   nameChangedhandler = (event, id) => {
     //debugger;
@@ -77,7 +84,15 @@ class App extends Component {
     return (
       <StyleRoot>
         <div className={myClasses.App}>
+          <button
+            onClick={() => {
+              this.setState({
+                showPersons: true
+              });
+            }}
+          />
           <Cockpit
+            appTitle={this.props.title}
             showPersons={this.state.showPersons}
             persons={this.state.persons}
             clicked={this.togglePersonHandler}
