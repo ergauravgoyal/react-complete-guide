@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import Radium, { StyleRoot } from "radium";
+import PropTypes from "prop-types";
 import myClasses from "./App.css";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
+import WithClass from "../hoc/WithClass";
 
 class App extends Component {
   state = {
@@ -11,7 +13,8 @@ class App extends Component {
       { id: "reyewrq", name: "Tejas", age: 6 },
       { id: "qrwqqwr", name: "Ikshit", age: 1 }
     ],
-    showPersons: false
+    showPersons: false,
+    toggleClicked: 0
   };
   componentWillMount() {
     console.log("[App.js] inside componentWillMount()");
@@ -57,8 +60,11 @@ class App extends Component {
   };
   togglePersonHandler = () => {
     //const doesShow = this.state.showPersons;
-    this.setState({
-      showPersons: !this.state.showPersons
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !this.state.showPersons,
+        toggleClicked: prevState.toggleClicked + 1
+      };
     });
   };
   render() {
@@ -83,14 +89,16 @@ class App extends Component {
 
     return (
       <StyleRoot>
-        <div className={myClasses.App}>
+        <WithClass classes={myClasses.App}>
           <button
             onClick={() => {
               this.setState({
                 showPersons: true
               });
             }}
-          />
+          >
+            Show Person
+          </button>
           <Cockpit
             appTitle={this.props.title}
             showPersons={this.state.showPersons}
@@ -98,7 +106,7 @@ class App extends Component {
             clicked={this.togglePersonHandler}
           />
           {persons}
-        </div>
+        </WithClass>
       </StyleRoot>
     );
   }

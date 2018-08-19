@@ -5,6 +5,19 @@
 .bold {
   font-weight: bold;
 }
+.Red {
+  background-color: red;
+}
+.Green {
+  background-color: green;
+}
+.Button {
+  padding: 16px;
+  font: inherit;
+  color: White;
+  cursor: pointer;
+  border-radius: 10px 12px;
+}
 
 .Cockpit button {
   padding: 16px;
